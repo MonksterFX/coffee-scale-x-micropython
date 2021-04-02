@@ -46,9 +46,6 @@ _SIMPLE_SERVICE = (
     (_READ_VALUES, _CMD_RECIVE),
 )
 
-_ADV_APPEARANCE_GENERIC_COMPUTER = const(128)
-
-
 class BLEx:
     def __init__(self, ble, name="Simple BLE Peripheral"):
         self._ble = ble
