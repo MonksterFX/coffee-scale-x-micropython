@@ -2,7 +2,7 @@
 
 from micropython import const
 import struct
-import bluetooth
+# import ubluetooth
 
 # Advertising payloads are repeated packets of the following form:
 #   1 byte data length (N + 1)
@@ -39,6 +39,7 @@ def advertising_payload(limited_disc=False, br_edr=False, name=None, services=No
 
     if services:
         for uuid in services:
+            print(uuid)
             b = bytes(uuid)
             if len(b) == 2:
                 _append(_ADV_TYPE_UUID16_COMPLETE, b)
