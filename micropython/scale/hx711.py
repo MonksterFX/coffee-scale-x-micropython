@@ -2,6 +2,7 @@ from utime import sleep_us, time
 from machine import Pin
 from micropython import const
 
+
 class HX711Exception(Exception):
     pass
 
@@ -12,6 +13,8 @@ class InvalidMode(HX711Exception):
 
 class DeviceIsNotReady(HX711Exception):
     pass
+
+# https://forum.pycom.io/topic/3304/speeding-up-hx711-library/14
 
 
 class HX711(object):
@@ -89,7 +92,8 @@ class HX711(object):
         HX711.CHANNEL_B_32 - Channel B with gain 32
         """
         if value not in (self.CHANNEL_A_128, self.CHANNEL_A_64, self.CHANNEL_B_32):
-            raise InvalidMode('Gain should be one of HX711.CHANNEL_A_128, HX711.CHANNEL_A_64, HX711.CHANNEL_B_32')
+            raise InvalidMode(
+                'Gain should be one of HX711.CHANNEL_A_128, HX711.CHANNEL_A_64, HX711.CHANNEL_B_32')
         else:
             self._channel = value
 

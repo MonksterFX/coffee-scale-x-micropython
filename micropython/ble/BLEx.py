@@ -89,16 +89,15 @@ class BLEx:
     # full list: https://docs.micropython.org/en/latest/library/ubluetooth.html#event-handling
 
     def _irq(self, event, data):
-        print(event)
         # tracking client - connect
         if event == _IRQ_CENTRAL_CONNECT:
             conn_handle, _, _ = data
-            print("client connected:", conn_handle)
+            print("irq -> client connected:", conn_handle)
             self._connections.add(conn_handle)
         # tracking client - disconnect
         elif event == _IRQ_CENTRAL_DISCONNECT:
             conn_handle, _, _ = data
-            print("client disconected:", conn_handle)
+            print("irq -> client disconected:", conn_handle)
             self._connections.remove(conn_handle)
             # Start advertising again to allow a new connection.
             self._advertise()
@@ -141,7 +140,7 @@ class BLEx:
     def _advertise(self, interval_us=500000):
         # avoid OSError: [Errno 5] EIO
         time.sleep(1)
-        print("starting advertising")
+        print("init: starting advertising")
         self._ble.gap_advertise(interval_us, adv_data=self._payload)
 
     # send data to all connected clients
